@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
 
     if (ndiv == 0) {
 	ndiv = 1;
-	divs[ndiv] = DEFAULT_DIV;
+	divs[0] = DEFAULT_DIV;
     }
 
     printf("tempo: %d\n", tempo);
