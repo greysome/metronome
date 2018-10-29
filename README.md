@@ -2,6 +2,10 @@
 
 metronome uses the terminal beep ('\a') to produce sound.
 
+**Demo:**
+
+![demo](https://raw.githubusercontent.com/greysome/metronome/master/demo.gif)
+
 **Installation (Linux only):**
 
 Navigate to project directory and run the following commands:
