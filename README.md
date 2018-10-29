@@ -4,7 +4,7 @@ metronome uses the terminal beep ('\a') to produce sound.
 
 **Demo:**
 
-![demo](https://raw.githubusercontent.com/greysome/metronome/master/demo.gif)
+![demo](https://raw.githubusercontent.com/greysome/metronome/master/output.gif)
 
 **Installation (Linux only):**
 
