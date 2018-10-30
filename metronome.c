@@ -27,13 +27,13 @@ int max(int *arr, size_t n) {
     return max;
 }
 
-int _gcd2(int x, int y) {
+int gcd2(int x, int y) {
     if (y == 0) return x;
-    else return _gcd2(y, x%y);
+    else return gcd2(y, x%y);
 }
 
-int _lcm2(int x, int y) {
-    return x*y / _gcd2(x,y);
+int lcm2(int x, int y) {
+    return x*y / gcd2(x,y);
 }
 
 int lcm(int *arr, size_t n) {
@@ -41,7 +41,7 @@ int lcm(int *arr, size_t n) {
 
     int lcm = 1;
     for (int i = 0; i < n; i++)
-	lcm = _lcm2(lcm, arr[i]);
+	lcm = lcm2(lcm, arr[i]);
     return lcm;
 }
 
