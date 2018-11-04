@@ -105,6 +105,7 @@ void metronome() {
 int main(int argc, char **argv) {
     int c;
     int div;
+    char *rawdiv;
     char *token;
     
     while ((c = getopt(argc, argv, "t:d:")) != -1) {
@@ -113,11 +114,12 @@ int main(int argc, char **argv) {
 	    tempo = atoi(optarg);
 	    break;
 	case 'd':
-	    while ((token = strtok(optarg, ",")) != NULL) {
+	    rawdiv = optarg;
+	    while ((token = strtok(rawdiv, ",")) != NULL) {
 		div = atoi(token);
 		if (div > 0 && ndiv < MAX_DIVS && !exists(div, divs, ndiv))
 		    divs[ndiv++] = div;
-		optarg = NULL;
+	        rawdiv = NULL;
 	    }
 	    break;
 	}
