@@ -1,3 +1,4 @@
+#include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -49,8 +50,9 @@ void metronome() {
     int nsubdiv = lcm(divs, ndiv);
     /* length of each cycle depends on this */
     int basediv = max(divs, ndiv);
-    double cyclelen = 60000000/tempo*basediv;
-    double delay = cyclelen/nsubdiv;
+    double cyclelen = (double) 60*1000000000/tempo*basediv;
+    struct timespec delay = {.tv_sec = 0,
+			     .tv_nsec = cyclelen/nsubdiv};
 
     /* calculate the number of subdivisions between each beep for each division */
     int subdivs[ndiv];
@@ -87,7 +89,8 @@ void metronome() {
 		    printf("\a\n\b");
 		}
 	    }
-	    usleep(delay);
+
+	    nanosleep(&delay, NULL);
 	}
 
 	/* clear all division numbers */
