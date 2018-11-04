@@ -16,7 +16,7 @@ int divs[MAX_DIVS];
 size_t ndiv;
 
 int exists(int val, int *arr, size_t n) {
-    for (int i = 0; i < n; i++)
+    for (size_t i = 0; i < n; i++)
 	if (arr[i] == val)
 	    return 1;
     return 0;
@@ -24,7 +24,7 @@ int exists(int val, int *arr, size_t n) {
 
 int max(int *arr, size_t n) {
     int max = INT_MIN;
-    for (int i = 0; i < n; i++)
+    for (size_t i = 0; i < n; i++)
 	if (arr[i] > max)
 	    max = arr[i];
     return max;
@@ -43,13 +43,13 @@ int lcm(int *arr, size_t n) {
     if (n == 1) return arr[0];
 
     int lcm = 1;
-    for (int i = 0; i < n; i++)
+    for (size_t i = 0; i < n; i++)
 	lcm = lcm2(lcm, arr[i]);
     return lcm;
 }
 
 void metronome() {
-    int nsubdiv = lcm(divs, ndiv);
+    size_t nsubdiv = lcm(divs, ndiv);
     /* length of each cycle depends on this */
     int basediv = max(divs, ndiv);
     double cyclelen = (double) 60*1000000000/tempo*basediv;
@@ -58,34 +58,34 @@ void metronome() {
 
     /* calculate the number of subdivisions between each beep for each division */
     int subdivs[ndiv];
-    for (int i = 0; i < ndiv; i++) {
+    for (size_t i = 0; i < ndiv; i++) {
 	subdivs[i] = nsubdiv/divs[i];
     }
 
     /* print the borders */
-    for (int i = 0; i < ndiv; i++) {
+    for (size_t i = 0; i < ndiv; i++) {
 	printf("| ");
-	for (int j = 0; j < nsubdiv; j++)
+	for (size_t j = 0; j < nsubdiv; j++)
 	    printf(" ");
 	printf(" |\n");
     }
     /* navigate to top-left corner */
     printf("\033[2C");
-    printf("\033[%dA", ndiv);
+    printf("\033[%ldA", ndiv);
     printf("\033[s");
 
     while (1) {
-	for (int i = 0; i < nsubdiv; i++) {
-	    for (int j = 0; j < ndiv; j++) {
+	for (size_t i = 0; i < nsubdiv; i++) {
+	    for (size_t j = 0; j < ndiv; j++) {
 		if (i%subdivs[j] == 0) {
 		    /* navigate to correct row */
 		    printf("\033[u");
-		    printf("\033[%dB", j);
+		    printf("\033[%ldB", j);
 
 		    /* print division number with padding */
-		    for (int k = 0; k < i; k++)
+		    for (size_t k = 0; k < i; k++)
 			printf(" ");
-		    printf("%d", i/subdivs[j]+1);
+		    printf("%ld", i/subdivs[j]+1);
 
 		    /* beep (\n registers the beep, \b ensures display is unaffected) */
 		    printf("\a\n\b");
@@ -97,11 +97,11 @@ void metronome() {
 
 	/* clear all division numbers */
 	printf("\033[u");
-	for (int i = 0; i < ndiv; i++) {
-	    for (int j = 0; j < nsubdiv; j++)
+	for (size_t i = 0; i < ndiv; i++) {
+	    for (size_t j = 0; j < nsubdiv; j++)
 		printf(" ");
 	    printf("\033[B");
-	    printf("\033[%dD", nsubdiv);
+	    printf("\033[%ldD", nsubdiv);
 	}
 	printf("\033[u");
     }
@@ -140,7 +140,7 @@ int main(int argc, char **argv) {
 
     printf("tempo: %d\n", tempo);
     printf("divisions: ");
-    for (int i = 0; i < ndiv; i++)
+    for (size_t i = 0; i < ndiv; i++)
 	printf("%d ", divs[i]);
     printf("\n");
 
