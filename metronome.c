@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
     char *rawdiv;
     char *token;
     
-    while ((c = getopt(argc, argv, "t:d:")) != -1) {
+    while ((c = getopt(argc, argv, "ht:d:")) != -1) {
 	switch (c) {
 	case 't':
 	    tempo = atoi(optarg);
@@ -127,6 +127,9 @@ int main(int argc, char **argv) {
 	        rawdiv = NULL;
 	    }
 	    break;
+	case 'h':
+	    puts("usage: ./metronome -t <tempo> -d <divisions>");
+	    return 0;
 	}
     }
 
